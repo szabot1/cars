@@ -53,5 +53,20 @@ namespace Cars.Controllers
 
             return NoContent();
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult Delete(CarsContext ctx, Guid id)
+        {
+            var existingCar = ctx.Cars.FirstOrDefault(car => car.Id == id);
+            if (existingCar == null)
+            {
+                return NotFound();
+            }
+
+            ctx.Cars.Remove(existingCar);
+            ctx.SaveChanges();
+
+            return NoContent();
+        }
     }
 }
