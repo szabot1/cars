@@ -12,3 +12,12 @@ public record CreateCarDto
     [Required]
     public string Description { get; init; } = null!;
 }
+
+public record UpdateCarDto
+{
+    [Required]
+    public string Name { get; init; } = null!;
+
+    [Required]
+    public string Description { get; init; } = null!;
+}

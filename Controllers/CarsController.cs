@@ -36,7 +36,22 @@ namespace Cars.Controllers
             });
             ctx.SaveChanges();
 
-            return Ok();
+            return NoContent();
+        }
+
+        [HttpPut("{id}")]
+        public ActionResult Update(CarsContext ctx, Guid id, UpdateCarDto car)
+        {
+            var existingCar = ctx.Cars.FirstOrDefault(car => car.Id == id);
+            if (existingCar == null)
+            {
+                return NotFound();
+            }
+
+            ctx.Entry(existingCar).CurrentValues.SetValues(car);
+            ctx.SaveChanges();
+
+            return NoContent();
         }
     }
 }
